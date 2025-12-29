@@ -34,12 +34,12 @@ def clean_text(text):
 # Load models and components
 @st.cache_resource
 def load_models():
-    model_mbti = joblib.load('model_mbti.pkl')
-    model_big5 = joblib.load('model_big5.pkl')
-    vectorizer_mbti = joblib.load('vectorizer_mbti.pkl')
-    vectorizer_big5 = joblib.load('vectorizer_big5.pkl')
-    label_encoder = joblib.load('label_encoder.pkl')
-    with open('mbti_to_big5_mapping.pkl', 'rb') as f:
+    model_mbti = joblib.load('models/model_mbti.pkl')
+    model_big5 = joblib.load('models/model_big5.pkl')
+    vectorizer_mbti = joblib.load('models/vectorizer_mbti.pkl')
+    vectorizer_big5 = joblib.load('models/vectorizer_big5.pkl')
+    label_encoder = joblib.load('models/label_encoder.pkl')
+    with open('models/mbti_to_big5_mapping.pkl', 'rb') as f:
         mapping = pickle.load(f)
     return model_mbti, model_big5, vectorizer_mbti, vectorizer_big5, label_encoder, mapping
 
