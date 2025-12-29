@@ -1,140 +1,134 @@
-# Personality Prediction System from CV Analysis
+```markdown
+# AI-Powered Personality Prediction from CV Analysis
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-v1.6-orange)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.30-red)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Status](https://img.shields.io/badge/Project-Complete-success)
+![Status](https://img.shields.io/badge/Status-Deployed-success)
 
 ## Project Overview
 
-**Personality Prediction System Through CV Analysis** is an AI-powered tool designed to estimate candidates' Big Five personality traits (OCEAN) from their resume or CV content using machine learning.
+**Personality Prediction System** is an advanced AI tool that analyzes the textual content of a resume or CV to estimate the candidate's **Big Five (OCEAN) personality traits**:
 
-The system analyzes textual elements such as word choices, professional experiences, achievements, and writing style to predict five core personality dimensions:
-- **Openness**
-- **Conscientiousness**
-- **Extraversion**
-- **Agreeableness**
-- **Neuroticism**
+- **Openness** – Creativity and willingness to experience new things
+- **Conscientiousness** – Organization, responsibility, and dependability
+- **Extraversion** – Sociability, assertiveness, and energy
+- **Agreeableness** – Cooperation, compassion, and trust
+- **Neuroticism** – Emotional stability and stress response
 
-This tool aims to support talent acquisition processes by providing data-driven insights into candidate personality profiles, helping reduce unconscious bias and enhance objective evaluation when used responsibly alongside traditional assessment methods.
+The system uses a **dual-model ensemble approach** combining MBTI classification with direct Big Five prediction to deliver robust and insightful results. It is designed as a **proof-of-concept for responsible AI in talent assessment**, providing supplementary insights to support — not replace — human judgment in recruitment and personal development.
 
-> **Important Note**: This system provides probabilistic estimates based on text patterns and should **never** replace professional psychological assessments or human judgment in hiring decisions.
+> **Ethical Note**: This tool generates probabilistic estimates based on linguistic patterns. Results are for educational, research, and exploratory purposes only and should never be used as the sole basis for employment decisions.
+
+## Live Demo
+
+[Try the Application]: https://2kactw6jnffgnhocrqkmss.streamlit.app/ 
 
 ## Key Features
 
-- **PDF Resume Upload & Text Extraction** – Supports standard text-based CVs
-- **Dual-Model Ensemble Approach** – Combines MBTI classification with direct Big Five prediction for improved robustness
-- **Interactive Radar Chart Visualization** – Clear, intuitive display of personality trait scores
-- **Predicted MBTI Type** – Additional insight from the Myers-Briggs classification
-- **Responsive Web Interface** – Built with Streamlit for seamless user experience
+- **PDF Resume Upload** with automatic text extraction
+- **Interactive Radar Chart** visualizing the Big Five personality profile
+- **Predicted MBTI Type** as complementary insight
+- **Detailed Trait Breakdown** with clear explanations
+- **Downloadable PDF Report** for sharing or archiving results
+- **LinkedIn Integration** – Guidance for importing profile data and sharing results
+- **Modern, Responsive UI** built with Streamlit
 
-## Demo
+## How It Works
 
-Live Demo:(https://2kactw6jnffgnhocrqkmss.streamlit.app/)
+1. **MBTI Classification Model**  
+   Trained on ~8,675 labeled social media posts to predict one of 16 MBTI types.
 
-## How It Works (Technical Architecture)
+2. **Big Five Direct Prediction Model**  
+   Trained on 1,578 personality-labeled essays using multi-output classification.
 
-The system employs a **two-stage ensemble model**:
-
-1. **MBTI Classification Model**
-   - Trained on ~8,675 social media posts labeled with 16 MBTI types
-   - Uses TF-IDF features with Logistic Regression
-   - Predicts most likely MBTI personality type from CV text
-
-2. **Big Five Direct Prediction Model**
-   - Trained on 1,578 personality-labeled essays
-   - Multi-output binary classification for each OCEAN trait
-   - Uses TF-IDF + Logistic Regression
-
-3. **Ensemble Fusion**
-   - Maps predicted MBTI type to approximate Big Five scores using established psychological correlations
-   - Combines direct Big Five probabilities (60%) with MBTI-mapped scores (40%)
-   - Outputs final trait percentages (0–100%)
+3. **Ensemble Fusion**  
+   Combines direct trait probabilities (60%) with psychologically validated MBTI-to-Big Five mapping (40%) for balanced, reliable scores.
 
 ## Technologies Used
 
-| Component              | Technology                          |
-|-----------------------|-------------------------------------|
-| Language              | Python 3.10+                        |
-| Machine Learning      | scikit-learn                        |
-| Text Processing       | NLTK, regex                         |
-| Feature Extraction    | TF-IDF Vectorizer                   |
-| PDF Processing        | pdfplumber                          |
-| Web Framework         | Streamlit                           |
-| Visualization         | Plotly (Radar Chart)                |
-| Model Persistence     | joblib, pickle                      |
-| Deployment            | Streamlit Community Cloud           |
+| Category               | Technology                          |
+|------------------------|-------------------------------------|
+| Programming Language   | Python 3.10+                        |
+| Machine Learning       | scikit-learn                        |
+| Text Processing        | NLTK, regex                         |
+| Feature Engineering    | TF-IDF Vectorization                |
+| PDF Handling           | pdfplumber                          |
+| Frontend & Deployment  | Streamlit                           |
+| Visualization          | Plotly (Interactive Radar Chart)    |
+| Report Generation      | ReportLab                           |
+| Model Persistence      | joblib, pickle                      |
 
-## Dataset Sources
+## Datasets
 
-- **MBTI Dataset**: [Kaggle - MBTI Type](https://www.kaggle.com/datasets/datasnaek/mbti-type) (~8,675 samples)
-- **Big Five Essays Dataset**: [Hugging Face - essays-big5](https://huggingface.co/datasets/jingjietan/essays-big5) (1,578 labeled essays)
+- **MBTI Dataset** – [Kaggle MBTI Type Dataset](https://www.kaggle.com/datasets/datasnaek/mbti-type) (~8,675 samples)
+- **Big Five Essays** – [Hugging Face essays-big5](https://huggingface.co/datasets/jingjietan/essays-big5) (1,578 labeled essays)
 
-## Installation & Local Setup
+## Project Structure
+
+```
+cv-personality-predictor/
+├── app.py                          # Main Streamlit application
+├── requirements.txt                # Project dependencies
+├── README.md                       # Project documentation
+└── models/                         # Trained models and components
+    ├── model_mbti.pkl
+    ├── model_big5.pkl
+    ├── vectorizer_mbti.pkl
+    ├── vectorizer_big5.pkl
+    ├── label_encoder.pkl
+    └── mbti_to_big5_mapping.pkl
+```
+
+## Local Installation & Running
 
 ```bash
-# Clone the repository
 git clone https://github.com/yourusername/cv-personality-predictor.git
 cd cv-personality-predictor
 
+python -m venv venv
+source venv/bin/activate          # On Windows: venv\Scripts\activate
 
-# Install dependencies
 pip install -r requirements.txt
 
-# Run the app locally
 streamlit run app.py
 ```
 
-## File Structure
+## Deployment
 
-```
-Hex_Software_Personality_Prediction-System_Through_CV_Analysis/
-├── app.py                          # Main Streamlit application
-├── requirements.txt                # Python dependencies
-├── README.md                       # Project documentation
-└── models/                         # Trained models and components
-├── model_mbti.pkl
-├── model_big5.pkl
-├── vectorizer_mbti.pkl
-├── vectorizer_big5.pkl
-├── label_encoder.pkl
-└── mbti_to_big5_mapping.pkl
-```
+The application is deployed on **Streamlit Community Cloud** (free tier):
+1. Push repository to GitHub
+2. Connect GitHub account on [share.streamlit.io](https://share.streamlit.io)
+3. Create new app → Select repository → Main file: `app.py`
 
-## Usage Guidelines
+## Responsible & Ethical Use
 
-1. Upload a **text-based PDF resume** (scanned/image-only PDFs may not work properly)
-2. Wait for text extraction and analysis
-3. View predicted MBTI type and Big Five trait percentages
-4. Interpret results as supplementary insights only
+- Personality inference from text has inherent limitations and potential biases
+- Results may vary across languages, cultures, and writing styles
+- Always protect user privacy and comply with data protection regulations
+- Use only as a supplementary tool in holistic evaluation processes
 
-## Ethical Considerations
+## Future Enhancements
 
-- This tool analyzes language patterns and should not be used as the sole basis for employment decisions
-- Personality prediction from text has limitations and potential cultural/language biases
-- Always combine with structured interviews, references, and skills assessments
-- Respect candidate privacy and data protection regulations (GDPR, CCPA, etc.)
-
-## Future Improvements
-
-- Support for DOCX and other formats
-- Multilingual capabilities
-- Fine-tuning with domain-specific HR/resume datasets
+- Support for DOCX and multilingual resumes
 - Integration of transformer-based models (e.g., BERT) for higher accuracy
-- Confidence scoring and explanation highlights
+- Confidence scoring and textual explanation highlights
+- Comparison mode against job description personality requirements
+- API endpoint for enterprise integration
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
 ## Author
 
-Eslam Alsaeed
-Machine Learning Enthusiast | AI for HR Innovation
+Eslam Alsaeed 
+Machine Learning Engineer | AI & HR Technology Enthusiast
+
+- LinkedIn: [linkedin.com/in/eslam-alsaeed-1a23921aa]
+- GitHub: [https://github.com/eslamalsaeed72-droid]
 
 ---
 
-**Built for educational and research purposes to explore AI applications in talent assessment.**
-
-For questions or contributions, please open an issue or submit a pull request.
+**A research-driven exploration of responsible AI applications in talent analytics and personal development.**.
