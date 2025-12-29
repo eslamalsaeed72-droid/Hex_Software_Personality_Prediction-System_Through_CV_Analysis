@@ -31,7 +31,7 @@ This tool aims to support talent acquisition processes by providing data-driven 
 
 ## Demo
 
-Live Demo: [https://your-app-link.streamlit.app](https://your-app-link.streamlit.app) 
+Live Demo:(https://2kactw6jnffgnhocrqkmss.streamlit.app/)
 
 ## How It Works (Technical Architecture)
 
